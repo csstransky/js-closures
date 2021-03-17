@@ -2,3 +2,11 @@ A config.js file will need to be included that follows this format:
 const config = {
     apiKey : "API_KEY"
 }
+
+You can call a function as a constant variable, AND it must include a parenthesis or else it won't execute
+what's inside of the function.
+
+const report = updateClicks; // BAD, this will not print correctly
+const report = updateClicks(); // GOOD, code in the function is now being executed
+
+I think this has to do with the fact that you're saying that variables can be input into the function.
