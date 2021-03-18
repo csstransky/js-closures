@@ -10,3 +10,11 @@ const report = updateClicks; // BAD, this will not print correctly
 const report = updateClicks(); // GOOD, code in the function is now being executed
 
 I think this has to do with the fact that you're saying that variables can be input into the function.
+
+
+Interesting thing to note is that closures are independent of one another, so you can declare multiple "copies"
+of closures without having to worry about reference.
+
+// Both of these are different and not the same reference
+let updateColors = updateClicks();
+let updateTextures = updateClicks();
