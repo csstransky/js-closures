@@ -1,5 +1,13 @@
 'use strict';
 
+let clicks = {};
+function updateClicks(menu) {
+
+  let button = menu.id;
+  clicks[button] = clicks[button] + 1 || 1;
+  console.log(clicks);
+}
+
 const activities = {
   teamIn: ['basketball','hockey','volleyball'],
   teamOutWarm: ['softball/baseball','football/soccer','American football','rowing','tennis','volleyball','ultimate frisbee','rugby'],
@@ -11,7 +19,7 @@ const activities = {
 let state = {};
 let category = 'all';
 let url = 'http://api.openweathermap.org/data/2.5/weather?q=';
-let apiKey = "APIKEY"; // Replace "APIKEY" with your own API key; otherwise, your HTTP request will not work
+let apiKey = config.apiKey; // Replace "APIKEY" with your own API key; otherwise, your HTTP request will not work
 function updateActivityList(event) {
   if (event !== undefined && event.target.classList.contains('selected')) {
     return true;
@@ -96,4 +104,11 @@ document.querySelectorAll('.options div').forEach(function(el) {
     updateActivityList(event);
     updateClicks(event.target);
   }, false);
+
+document.querySelectorAll('.options div').forEach(function(el) {
+  el.addEventListener('click', function(event) {
+    updateActivityList(event);
+    updateClicks(event.target);
+  }, false);
+});
 });

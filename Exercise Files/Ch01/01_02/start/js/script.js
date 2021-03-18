@@ -5,7 +5,11 @@ let clicks = {};
 function updateClicks(menu) {
   let button = menu.id;
   clicks[button] = clicks[button] + 1 || 1;
-  console.log(clicks);
+  function reportClicks() {
+    const report = [button, clicks];
+    console.log(...report);
+  }
+  reportClicks();
 }
 
 const activities = {
@@ -19,7 +23,7 @@ const activities = {
 let state = {};
 let category = 'all';
 let url = 'http://api.openweathermap.org/data/2.5/weather?q=';
-let apiKey = "APIKEY"; // Replace "APIKEY" with your own API key; otherwise, your HTTP request will not work
+let apiKey = config.apiKey; // Replace "APIKEY" with your own API key; otherwise, your HTTP request will not work
 function updateActivityList(event) {
   if (event !== undefined && event.target.classList.contains('selected')) {
     return true;
