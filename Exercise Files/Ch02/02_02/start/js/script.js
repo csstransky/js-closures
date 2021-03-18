@@ -65,6 +65,22 @@ const listWidget = (function() {
       document.querySelector('.activities').innerHTML = activitiesContainer;
       document.querySelector('.results').classList.add('open');
     },
+    updateUIWorking: function() {
+      // Works perfectly because "let" allows for scope outside the for loop
+      // for (let ii = 0; ii <= 9; ii++) {
+      //   setTimeout(function() {
+      //     document.querySelector('.conditions').innerHTML = `<p class="animation">00:00.${ii}</p>`;
+      //   }, 100 * ii);
+      // }
+      for (var ii = 0; ii <= 9; ii++) {
+        // We need this to pass scope to the other functions because "var" does NOT have scope outside loop
+        (function (jj) {
+          setTimeout(function () {
+            document.querySelector('.conditions').innerHTML = `<p class="animation">00:00.${jj}</p>`;
+          }, 100 * jj);
+        })(ii);
+      }
+    },
     updateUISuccess: function(response) {
       const degC = response.main.temp - 273.15;
       const degF = degC * 1.8 + 32;
@@ -94,15 +110,16 @@ const listWidget = (function() {
 // get weather data when user clicks Forecast button, then add temp & conditions to view
 document.querySelector('.forecast-button').addEventListener('click', function(e) {
   e.preventDefault();
+  listWidget.updateUIWorking();
   const location = document.querySelector('#location').value;
   document.querySelector('#location').value = '';
-  fetch(listWidget.url + location + '&appid=' + listWidget.apiKey).then(function(response) {
-    return(response.json());
-  }).then(function(response) {
-    listWidget.updateUISuccess(response);
-  }).catch(function(response) {
-    listWidget.updateUIFailure();
-  });
+  // fetch(listWidget.url + location + '&appid=' + listWidget.apiKey).then(function(response) {
+  //   return(response.json());
+  // }).then(function(response) {
+  //   listWidget.updateUISuccess(response);
+  // }).catch(function(response) {
+  //   listWidget.updateUIFailure();
+  // });
 }, false);
 
 // update list of sports when user selects a different category (solo/team/all)

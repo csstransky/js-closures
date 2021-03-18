@@ -27,5 +27,22 @@ Modules:
 - Avoids cluttering global namespace
 - For all intents and purposes, think of this as an Object for OOD type stuff
 
-Little () at the end of a function is called an "IIFE" (Immediately-Invoked Function Expressions):
+Wrapping a function in () with a little () at the end is called an "IIFE" (Immediately-Invoked Function Expressions):
 This means it's invoked immediately when the JS code is parsed
+Example:
+(function() { console.log("lol"); })();
+
+
+Avoid unintended closures in for loops
++ let, const: create block scope within a loop
++ var: does NOT create block scope in loop
+ for (var ii = 0; ii <= 9; ii++) { // This will stop at 10 and not do any counting
+    setTimeout(function() {
+      document.querySelector('.conditions').innerHTML = `<p class="animation">00:00.${ii}</p>`;
+    }, 100 * ii);
+  }
+for (let ii = 0; ii <= 9; ii++) { // This will actually count from 0 to 9
+  setTimeout(function() {
+    document.querySelector('.conditions').innerHTML = `<p class="animation">00:00.${ii}</p>`;
+  }, 100 * ii);
+}
