@@ -18,3 +18,14 @@ of closures without having to worry about reference.
 // Both of these are different and not the same reference
 let updateColors = updateClicks();
 let updateTextures = updateClicks();
+
+
+Modules:
+- Encapsulate code
+- Expose subset of properties and methods
+- Protect values with private methods
+- Avoids cluttering global namespace
+- For all intents and purposes, think of this as an Object for OOD type stuff
+
+Little () at the end of a function is called an "IIFE" (Immediately-Invoked Function Expressions):
+This means it's invoked immediately when the JS code is parsed
